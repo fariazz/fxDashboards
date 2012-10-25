@@ -1,0 +1,7 @@
+.day_block {
+    width: 100px;
+    height: 150px;
+    float: left;
+    border: 1px solid;
+    margin: 5px;
+}
