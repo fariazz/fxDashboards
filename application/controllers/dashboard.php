@@ -2,7 +2,19 @@
 
 class Dashboard extends MY_Controller {
     
-    public function index() {                                
+    public function index() {                
+        $this->data['startDate'] = date_create();
+        if($this->data['startDate']->format('l') != 'Monday') {
+            $this->data['startDate']->modify('last monday');
+        }        
+        
+        $this->data['endDate'] = date_create();
+        if($this->data['endDate']->format('l') != 'Sunday') {
+            $this->data['endDate']->modify('next sunday')->modify('next sunday');
+        }        
+        else {
+            $this->data['endDate']->modify('next sunday');
+        }
         $this->load->view('dashboard', $this->data);
     }    
     

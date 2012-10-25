@@ -1,3 +1,3 @@
 <div class="day_block">
-    <?php echo $day['date']->format('d/m'); ?>
+    <div class="date_div"><?php echo $day['date']->format('l d/m'); ?></div>
 </div>
