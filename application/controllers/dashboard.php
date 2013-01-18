@@ -15,6 +15,9 @@ class Dashboard extends MY_Controller {
         else {
             $this->data['endDate']->modify('next sunday');
         }
+                
+        $this->data['projects'] = $this->project_model->get_all();
+        
         $this->load->view('dashboard', $this->data);
     }    
     
@@ -23,9 +26,12 @@ class Dashboard extends MY_Controller {
         
         foreach($days as $day) {
             //@TODO load tasks for that day
-            $tasks = array();
+            $this->data['tasks'] = $this->task_model->getWithProjectsOnDate($day['date']->format('Y-m-d'));       
+            $this->data['day'] = $day;
             
-            $this->load->view('_dayBlock', array('day' => $day, 'tasks' => $tasks));
+            //var_dump($tasks); 
+            
+            $this->load->view('_dayBlock', $this->data);
         }
     }    
     
