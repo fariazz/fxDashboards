@@ -7,6 +7,7 @@
         $.post("<?php echo site_url('dashboard/getDays') ?>", { startDate: "<?php echo $startDate->format('Y-m-d') ?>", endDate: "<?php echo $endDate->format('Y-m-d') ?>" },
             function(data){
               $('#days_area').html(data);
+              $('.task-options').hide();
             }, "html");
     };
 
@@ -25,6 +26,57 @@
             $('#tasks_list').html(data);
             }, "html");
     };
+    
+    /**
+     * toggle task options
+     * @param task_id
+     */
+    fxDashboard.toggleTaskOptions = function(task_id) {
+        $('#task-options-'+task_id).toggle();
+    }
+    
+    /**
+     * delete a task
+     * @param task_id
+     */
+    fxDashboard.deleteTask = function(task_id) {
+        $.post("<?php echo site_url('task/delete') ?>", {task_id: task_id},
+            function(data){
+                if(data.success) {
+                    fxDashboard.loadCalendar();
+                    fxDashboard.loadTasks();
+                }                        
+            }, "json");
+    }
+    
+    /**
+     * toggle completion for task
+     * @param task_id
+     */
+    fxDashboard.toggleTaskCompletion = function(task_id) {
+        $.post("<?php echo site_url('task/toggleCompletion') ?>", {task_id: task_id},
+            function(data){
+                if(data.success) {
+                    fxDashboard.loadCalendar();
+                    fxDashboard.loadTasks();
+                }                        
+            }, "json");
+    }
+    
+    /**
+     * delete a project
+     * @param project_id
+     */
+    fxDashboard.deleteProject = function(project_id) {
+        $.post("<?php echo site_url('Project/delete') ?>", {project_id: project_id},
+            function(data){
+                if(data.success) {
+                    fxDashboard.loadCalendar();
+                    fxDashboard.loadTasks();
+                    fxDashboard.loadProjects();
+                }                        
+            }, "json");
+    }
     
     $(document).ready(function() {
         //project form
@@ -54,9 +106,6 @@
 <div id="days_area"></div>
 
 <div style="clear:both;padding-top:30px;"></div>
-
-<h2>Tasks</h2>
-<li id="tasks_list"></li>
 
 <h2>New Task</h2>
 <div id="task_form_output"></div>
@@ -95,9 +144,8 @@ echo form_open('task', $attributes); ?>
 </p>
 <?php echo form_close(); ?>
 
-<h2>Projects</h2>
-<li id="projects_list">
-</li>
+<h2>Tasks</h2>
+<li id="tasks_list"></li>
 
 <h2>New Project</h2>
 <div id="project_form_output"></div>
@@ -122,5 +170,10 @@ echo form_open('Project', $attributes); ?>
 </p>
 
 <?php echo form_close(); ?>
+
+<h2>Projects</h2>
+<li id="projects_list">
+</li>
+
 
 <?php include("_footer.php") ?>

@@ -369,7 +369,7 @@ class MY_Model extends CI_Model
         $this->trigger('before_delete', $id);
 
         $this->db->where($this->primary_key, $id);
-
+        
         if ($this->soft_delete)
         {
             $result = $this->db->update($this->_table, array( $this->soft_delete_key => TRUE ));

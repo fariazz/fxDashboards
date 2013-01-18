@@ -1,8 +1,6 @@
 <?php
 class Task_model extends MY_Model {
     
-    public $belongs_to = array('project');
-    
      /** 
        * function SaveForm()
        *
@@ -27,7 +25,7 @@ class Task_model extends MY_Model {
          */
         function getAllWithProjects()
         {
-            $this->db->select('*');
+            $this->db->select('*, tasks.id as task_id');
             $this->db->from('tasks');
             $this->db->join('projects', 'tasks.project_id = projects.id');
             return $this->db->get()->result_array();
@@ -38,7 +36,7 @@ class Task_model extends MY_Model {
          */
         function getWithProjectsOnDate($date)
         {
-            $this->db->select('*');
+            $this->db->select('*, tasks.id as task_id');
             $this->db->from('tasks');
             $this->db->join('projects', 'tasks.project_id = projects.id');
             $this->db->where('tasks.due_date', $date);

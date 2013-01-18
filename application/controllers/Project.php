@@ -52,6 +52,17 @@ class Project extends CI_Controller {
         $this->load->view('_projectsList', array('projects' => $projects));
 
     }
+    
+    /**
+     * delete a project      
+     */
+    function delete()
+    {
+        $project_id = $this->input->post('project_id');
+        $this->project_model->delete($project_id);
+        echo json_encode(array('success' => 1));
+        exit();        
+    }
 
 }
 ?>

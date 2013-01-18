@@ -61,6 +61,31 @@ class Task extends CI_Controller {
         $items = $this->task_model->getAllWithProjects();
         $this->load->view('_tasksList', array('items' => $items));
     }
+    
+    /**
+     * delete a task      
+     */
+    function delete()
+    {
+        $task_id = $this->input->post('task_id');
+        $this->task_model->delete($task_id);
+        echo json_encode(array('success' => 1));
+        exit();        
+    }
+
+    /**
+     * toggle completion of a task      
+     */
+    function toggleCompletion()
+    {
+        $task_id = $this->input->post('task_id');
+        $task = $this->task_model->get($task_id);
+        
+        $this->task_model->update($task_id, array( 'is_completed' => !$task->is_completed ));
+        
+        echo json_encode(array('success' => 1));
+        exit();        
+    }
 
 }
 ?>
