@@ -5,7 +5,7 @@ class Dashboard extends MY_Controller {
     public function index() {                
         $this->data['startDate'] = date_create();
         if($this->data['startDate']->format('l') != 'Monday') {
-            $this->data['startDate']->modify('last monday');
+            $this->data['startDate']->modify('last friday');
         }        
         
         $this->data['endDate'] = date_create();

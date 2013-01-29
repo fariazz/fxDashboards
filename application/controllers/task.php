@@ -86,6 +86,18 @@ class Task extends CI_Controller {
         echo json_encode(array('success' => 1));
         exit();        
     }
+    
+    /**
+     * update task date
+     */
+    function updateDate() {
+        $task_id = $this->input->post('task_id');
+        $newDate = $this->input->post('new_date');
+        $this->task_model->update($task_id, array( 'due_date' => $newDate));
+        
+        echo json_encode(array('success' => 1));
+        exit();        
+    }
 
 }
 ?>

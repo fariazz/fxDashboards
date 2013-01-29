@@ -8,6 +8,18 @@
             function(data){
               $('#days_area').html(data);
               $('.task-options').hide();
+              
+              $('.task-block').draggable({
+                  stop: function() {                      
+                      $(this).find('.task-options').show();
+                  } 
+              });
+              
+              $('.day_block').droppable({
+                drop: function( event, ui ) {
+                    fxDashboard.updateTaskDate($(ui.draggable).attr('zva-task-id'), $(this).attr('zva-date'));
+                }
+                });
             }, "html");
     };
 
@@ -76,7 +88,19 @@
                     fxDashboard.loadProjects();
                 }                        
             }, "json");
-    }
+    };
+    
+    /**
+     * update the date of a task
+     */
+    fxDashboard.updateTaskDate = function(task_id, new_date) {
+        $.post("<?php echo site_url('task/updateDate') ?>", {task_id: task_id, new_date: new_date},
+            function(data){
+                if(data.success) {
+                    console.log('date changed');
+                }                        
+            }, "json");
+    };
     
     $(document).ready(function() {
         //project form

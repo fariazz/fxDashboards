@@ -1,7 +1,7 @@
 /*calendar area*/
 .day_block {
-    width: 100px;
-    min-height: 170px;
+    width: 120px;
+    min-height: 200px;
     float: left;
     border: 1px solid;
     margin: 5px;
@@ -17,10 +17,14 @@
 }
 
 .day_task_item {
-    font-size:10pt;
-    margin: 5px 0;
+    font-size:8pt;
+    margin: 5px 15px;
     padding: 5px 0;
     
+}
+
+.task-options {
+    margin-left: 12px;
 }
 
 .task-option-delete {
