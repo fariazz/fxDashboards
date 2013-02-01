@@ -168,9 +168,6 @@ echo form_open('task', $attributes); ?>
 </p>
 <?php echo form_close(); ?>
 
-<h2>Tasks</h2>
-<li id="tasks_list"></li>
-
 <h2>New Project</h2>
 <div id="project_form_output"></div>
 <?php
@@ -189,6 +186,9 @@ echo form_open('Project', $attributes); ?>
 </p>
 
 
+<h2>Tasks</h2>
+<div id="tasks_list"></div>
+
 <p>
     <?php echo form_submit( 'submit', 'Submit'); ?>
 </p>
@@ -196,8 +196,8 @@ echo form_open('Project', $attributes); ?>
 <?php echo form_close(); ?>
 
 <h2>Projects</h2>
-<li id="projects_list">
-</li>
+<div id="projects_list">
+</div>
 
 
 <?php include("_footer.php") ?>
