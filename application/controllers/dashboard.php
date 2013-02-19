@@ -5,15 +5,15 @@ class Dashboard extends MY_Controller {
     public function index() {                
         $this->data['startDate'] = date_create();
         if($this->data['startDate']->format('l') != 'Monday') {
-            $this->data['startDate']->modify('last friday');
+            $this->data['startDate']->modify('-1 week');
         }        
         
         $this->data['endDate'] = date_create();
         if($this->data['endDate']->format('l') != 'Sunday') {
-            $this->data['endDate']->modify('next sunday')->modify('next sunday');
+            $this->data['endDate']->modify('next sunday')->modify('next sunday')->modify('next sunday');
         }        
         else {
-            $this->data['endDate']->modify('next sunday');
+            $this->data['endDate']->modify('next sunday')->modify('next sunday');
         }
                 
         $this->data['projects'] = $this->project_model->get_all();

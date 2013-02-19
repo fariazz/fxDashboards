@@ -40,6 +40,7 @@ class Task_model extends MY_Model {
             $this->db->from('tasks');
             $this->db->join('projects', 'tasks.project_id = projects.id');
             $this->db->where('tasks.due_date', $date);
+            $this->db->order_by('projects.id');
             return $this->db->get()->result_array();
         }
 }
